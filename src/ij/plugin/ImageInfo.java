@@ -195,7 +195,7 @@ public class ImageInfo implements PlugIn {
 	}
 	}
 	
-	protected void addAdditionalStackInfo(ImagePlus imp, int stackSize,double interval, double fps, String s,int channels, int slices, int frames ) {
+	protected void addAdditionalStackInfo(ImagePlus imp, int stackSize,double interval, double fps, String s,int channels, int slices, int frames, Calibration cal) {
 		ImageStack stack = imp.getStack();
 		int slice = imp.getCurrentSlice();
 		String number = slice + "/" + stackSize;
@@ -383,7 +383,7 @@ public class ImageInfo implements PlugIn {
 		double interval = cal.frameInterval;
 		double fps = cal.fps;
     	if (stackSize>1) {
-    		this.addAdditionalStackInfo(imp, stackSize, interval, fps, s, channels, slices, frames);
+    		this.addAdditionalStackInfo(imp, stackSize, interval, fps, s, channels, slices, frames, cal);
 		} else if (imp.hasImageStack()) { // one image stack
     		String label = imp.getStack().getShortSliceLabel(1);
     		if (label!=null && label.length()>0)
