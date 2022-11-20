@@ -122,7 +122,7 @@ public class ImageInfo implements PlugIn {
 			return null;
 	}
 	
-	private void calculateScaledInfo(Calibration cal,boolean nonUniformUnits, ImagePlus imp, String xunit, String yunit, String zunit, int slices, String s) {
+	protected void calculateScaledInfo(Calibration cal,boolean nonUniformUnits, ImagePlus imp, String xunit, String yunit, String zunit, int slices, String s) {
 		String xunits = cal.getUnits();
 		String yunits = xunits;
 		String zunits = xunits;
@@ -150,7 +150,7 @@ public class ImageInfo implements PlugIn {
     	}
 	}
 	
-	private void addColorbitInfo(int type, String s, Calibration cal,ImagePlus imp, ImageProcessor ip) {
+	protected void addColorbitInfo(int type, String s, Calibration cal,ImagePlus imp, ImageProcessor ip) {
 		switch (type) {
     	case ImagePlus.GRAY8:
     		s += "Bits per pixel: 8 ";
@@ -195,7 +195,7 @@ public class ImageInfo implements PlugIn {
 	}
 	}
 	
-	private void addAdditionalStackInfo(ImagePlus imp, int stackSize,double interval, double fps, String s,int channels, int slices, int frames ) {
+	protected void addAdditionalStackInfo(ImagePlus imp, int stackSize,double interval, double fps, String s,int channels, int slices, int frames ) {
 		ImageStack stack = imp.getStack();
 		int slice = imp.getCurrentSlice();
 		String number = slice + "/" + stackSize;
@@ -241,7 +241,7 @@ public class ImageInfo implements PlugIn {
 		}
 	}
 	
-	private void getCalibratedInfo(String s, Calibration cal, String valueUnit) {
+	protected void getCalibratedInfo(String s, Calibration cal, String valueUnit) {
 		s += " \n";
     	int curveFit = cal.getFunction();
 		s += "Calibration function: ";
@@ -265,7 +265,7 @@ public class ImageInfo implements PlugIn {
 		s += "  Unit: \""+valueUnit+"\"\n";
 	}
 	
-	private void processRoi(String s, ImagePlus imp, Calibration cal ) {
+	protected void processRoi(String s, ImagePlus imp, Calibration cal ) {
 		 Roi roi = imp.getRoi();
 		    if (roi == null) {
 				if (cal.calibrated())

@@ -115,7 +115,7 @@ public class FolderOpener implements PlugIn, TextListener {
 		return image;
 	}
 	
-	private String[] createFileWithParentFromDirectory() {
+	protected String[] createFileWithParentFromDirectory() {
 		File file = new File(directory);
 		String[] list = file.list();
 		if (list==null) {
@@ -132,7 +132,7 @@ public class FolderOpener implements PlugIn, TextListener {
 		}
 		return list;
 	}
-	private void removeSubdirectories(String[] list, ArrayList fileList) {
+	protected void removeSubdirectories(String[] list, ArrayList fileList) {
 		for (int i=0; i<list.length; i++) {
 			File f = (new File(directory+list[i]));
 			if (!f.isDirectory())
@@ -140,7 +140,7 @@ public class FolderOpener implements PlugIn, TextListener {
 		}
 	}
 	
-	private String getTitle() {
+	protected String getTitle() {
 		String title = directory;
 		if (title.endsWith(File.separator) || title.endsWith("/"))
 			title = title.substring(0, title.length()-1);
@@ -158,7 +158,7 @@ public class FolderOpener implements PlugIn, TextListener {
 	}
 	
 	
-	private ImageStack openImagesAsStack(int width, int height, String[] list, int stackSize, Calibration cal, boolean allSameCalibration, Overlay overlay, boolean dicomImages, double min, double max) {
+	protected ImageStack openImagesAsStack(int width, int height, String[] list, int stackSize, Calibration cal, boolean allSameCalibration, Overlay overlay, boolean dicomImages, double min, double max) {
 		int count = 0;
 		int counter = 0;
 		ImagePlus imp = null;
