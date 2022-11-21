@@ -275,15 +275,15 @@ public class FolderOpener implements PlugIn, TextListener {
 					ip = inputStack.getProcessor(slice);
 					if (bitDepth2!=bitDepth) {
 						if (dicomImages && bitDepth==16 && bitDepth2==32 && this.scale==100) {
-							ip = ip.convertToFloat();
+							ip = ip.convertToFloatProcessor();
 							bitDepth = 32;
 							ImageStack stack2 = new ImageStack(width, height, stack.getColorModel());
 							for (int n=1; n<=stack.size(); n++) {
 								ImageProcessor ip2 = stack.getProcessor(n);
-								ip2 = ip2.convertToFloat();
+								ip2 = ip2.convertToFloatProcessor();
 								ip2.subtract(32768);
 								String sliceLabel = stack.getSliceLabel(n);
-								stack2.addSlice(sliceLabel, ip2.convertToFloat());
+								stack2.addSlice(sliceLabel, ip2.convertToFloatProcessor());
 							}
 							stack = stack2;
 						}
@@ -403,9 +403,7 @@ public class FolderOpener implements PlugIn, TextListener {
 				this.start = 1;
 			if (this.start+this.nFiles-1>list.length)
 				this.nFiles = list.length-this.start+1;
-		
-			
-			// open images as stack
+
 			stack = this.openImagesAsStack(width, height, list, stackSize, cal, allSameCalibration, overlay, dicomImages, min, max);
 			
 		} catch(OutOfMemoryError e) {
